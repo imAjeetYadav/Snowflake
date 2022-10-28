@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE Schema2.simple_stored_procedure_example()
+CREATE OR REPLACE PROCEDURE Schema2.SP2()
 returns string not null
 language javascript
 as
