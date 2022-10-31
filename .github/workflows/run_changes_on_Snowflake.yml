@@ -32,11 +32,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v34
       - name: Download SnowSQL
         run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
       - name: Install SnowSQL
         run: SNOWSQL_DEST=~/snowflake SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
       - name: Test installation
         run:  ~/snowflake/snowsql -v
-      - name: Execute SQL against Snowflake
-        run:  ~/snowflake/snowsql -f ./SQL/DUMMY.sql;
+      - name: Execute SQL from all changed files against Snowflake 
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            if [[ $file == *.sql ]]; 
+            then 
+                echo "$file was changed"
+                 ~/snowflake/snowsql -f $file
+            fi
+          done
+     # - name: Execute SQL against Snowflake
+     #   run:  ~/snowflake/snowsql -f ./SQL/DUMMY.sql;
