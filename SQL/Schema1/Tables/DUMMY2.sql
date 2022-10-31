@@ -1,5 +1,5 @@
 create or replace table Schema1.DUMMY2 (
-    ID int not null,
-    NAME varchar(100) not NULL,
+    ID1 int not null,
+    NAME2 varchar(100) not NULL,
     dummy100 number null
 );
