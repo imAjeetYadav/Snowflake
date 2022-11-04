@@ -35,6 +35,8 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v34
+        with:
+          path: SQL
       - name: Download SnowSQL
         run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
       - name: Install SnowSQL
@@ -47,6 +49,7 @@ jobs:
             if [[ $file == *.sql ]]; 
             then 
                 echo "$file was changed"
+                python validate.py $file
                  ~/snowflake/snowsql -f $file
             fi
           done
