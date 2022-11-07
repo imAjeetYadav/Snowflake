@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE Schema1.SP1()
+CREATE OR REPLACE PROCEDURE Schema4.SP1()
 returns string not null
 language javascript
 as
