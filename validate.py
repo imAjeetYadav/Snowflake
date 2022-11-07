@@ -53,5 +53,7 @@ splitSchemaName = schemaName.split('.')
 checkPath = splitSchemaName[0]+"/"+schemaType
 if checkPath in path and checkPath != "/":
     print(" files locations are correct ")
+    exit(0)
 else:
     print(" please place the files in correct location ")
+    exit(1)
